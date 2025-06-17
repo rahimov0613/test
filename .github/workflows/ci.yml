@@ -1,0 +1,29 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Repositoryni yuklab olish
+      uses: actions/checkout@v4
+
+    - name: Node.js o'rnatish
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Pnpm o'rnatish
+      run: npm install -g pnpm
+
+    - name: Pnpm dependencies yuklash
+      run: pnpm install
+
+    - name: Testlarni ishga tushirish
+      run: pnpm test
